@@ -1,0 +1,45 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sukuna",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-11-24",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "define": {
+    "globalThis.process.getBuiltinModule": "undefined"
+  },
+  "rules": [
+    {
+      "type": "CompiledWasm",
+      "globs": [
+        "**/*.wasm"
+      ],
+      "fallthrough": false
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "BOT",
+        "class_name": "SukunaBot"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "SukunaBot"
+      ]
+    }
+  ],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    }
+  }
+}
